@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1085432541657",
+    "project_id": "messengerapp-e2cad",
+    "storage_bucket": "messengerapp-e2cad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085432541657:android:b73dab79f5930c9acf29c8",
+        "android_client_info": {
+          "package_name": "com.example.messengerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085432541657-b7riv12c9ekn5bsuouqdan3potbjv8mk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJhlYIs5qA6KM0hbvtptyQdm8FGZZEK38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085432541657-b7riv12c9ekn5bsuouqdan3potbjv8mk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
