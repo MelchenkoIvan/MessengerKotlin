@@ -5,7 +5,8 @@
       <map>
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/drawable-v24/background_left.xml" value="0.40625" />
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/activity_login.xml" value="0.24479166666666666" />
-        <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/activity_message_chat.xml" value="0.23020833333333332" />
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/activity_welcome.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/content_main.xml" value="0.4041666666666667" />
@@ -14,6 +15,9 @@
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/fragment_search.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/fragment_second.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/fragment_settings.xml" value="0.24479166666666666" />
+        <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/message_item_left.xml" value="0.23020833333333332" />
+        <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/message_item_right.xml" value="0.23020833333333332" />
+        <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/layout/user_search_item_layout.xml" value="0.23020833333333332" />
         <entry key="..\:/Users/vladh/AndroidStudioProjects/MessengerApp2/app/src/main/res/menu/menu_main.xml" value="0.24479166666666666" />
       </map>
     </option>

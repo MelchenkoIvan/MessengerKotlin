@@ -20,13 +20,15 @@ import androidx.viewpager.widget.ViewPager
 import com.example.messengerapp.Fragments.ChatsFragment
 import com.example.messengerapp.Fragments.SearchFragment
 import com.example.messengerapp.Fragments.SettingsFragment
+import com.example.messengerapp.ModelClasses.Users
 import com.example.messengerapp.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,8 +40,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main)
 
-        // = FirebaseAuth.getInstance().currentUser
-       // refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+        refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
+
 
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
@@ -56,6 +59,22 @@ class MainActivity : AppCompatActivity() {
 
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
+
+        refUsers!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists())
+                {
+                    val user: Users? = p0.getValue(Users::class.java)
+
+                    user_name.text = user!!.getUserName()
+                    Picasso.get().load(user.getProfile()).placeholder(R.drawable.profile).into(profile_image)
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
