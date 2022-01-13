@@ -9,8 +9,14 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messengerapp.AdapterClasses.ChatsAdapter
+import com.example.messengerapp.Fragments.APIService
 import com.example.messengerapp.ModelClasses.Chat
 import com.example.messengerapp.ModelClasses.Users
+import com.example.messengerapp.Notifications.Data
+import com.example.messengerapp.Notifications.MyResponse
+import com.example.messengerapp.Notifications.Sender
+import com.example.messengerapp.Notifications.Token
+import com.example.messengerapp.Notifications.Client
 import com.google.android.gms.common.api.Api
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
@@ -22,6 +28,9 @@ import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_message_chat.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MessageChatActivity : AppCompatActivity()
 {
@@ -33,7 +42,7 @@ class MessageChatActivity : AppCompatActivity()
     var reference: DatabaseReference? = null
 
     var notify = false
-//    var apiService: APIService? = null
+    var apiService: APIService? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -51,7 +60,7 @@ class MessageChatActivity : AppCompatActivity()
         }
 
 
-//        apiService = Api.Client.Client.getClient("https://fcm.googleapis.com/")!!.create(APIService::class.java)
+        apiService =  Client.Client.getClient("https://fcm.googleapis.com/")!!.create(APIService::class.java)
 
 
         intent = intent
@@ -166,7 +175,7 @@ class MessageChatActivity : AppCompatActivity()
                 val user = p0.getValue(Users::class.java)
                 if (notify)
                 {
-//                    sendNotification(receiverId, user!!.getUserName(), message)
+                    sendNotification(receiverId, user!!.getUserName(), message)
                 }
                 notify = false
             }
@@ -178,58 +187,58 @@ class MessageChatActivity : AppCompatActivity()
     }
 
 
-//    private fun sendNotification(receiverId: String?, userName: String?, message: String)
-//    {
-//        val ref = FirebaseDatabase.getInstance().reference.child("Tokens")
-//
-//        val query = ref.orderByKey().equalTo(receiverId)
-//
-//        query.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(p0: DataSnapshot)
-//            {
-//                for (dataSnapshot in p0.children)
-//                {
-//                    val token: Token? = dataSnapshot.getValue(Token::class.java)
-//
-//                    val data = Data(
-//                        firebaseUser!!.uid,
-//                        R.mipmap.ic_launcher,
-//                        "$userName: $message",
-//                        "New Message",
-//                        userIdVisit
-//                    )
-//
-//                    val sender = Sender(data!!, token!!.getToken().toString())
-//
-//                    apiService!!.sendNotification(sender)
-//                        .enqueue(object : Callback<MyResponse>
-//                        {
-//                            override fun onResponse(
-//                                call: Call<MyResponse>,
-//                                response: Response<MyResponse>
-//                            )
-//                            {
-//                                if (response.code() == 200)
-//                                {
-//                                    if (response.body()!!.success !== 1)
-//                                    {
-//                                        Toast.makeText(this@MessageChatActivity, "Failed, Nothing happen.", Toast.LENGTH_LONG).show()
-//                                    }
-//                                }
-//                            }
-//
-//                            override fun onFailure(call: Call<MyResponse>, t: Throwable) {
-//
-//                            }
-//                        })
-//                }
-//            }
-//
-//            override fun onCancelled(p0: DatabaseError) {
-//
-//            }
-//        })
-//    }
+    private fun sendNotification(receiverId: String?, userName: String?, message: String)
+    {
+        val ref = FirebaseDatabase.getInstance().reference.child("Tokens")
+
+        val query = ref.orderByKey().equalTo(receiverId)
+
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot)
+            {
+                for (dataSnapshot in p0.children)
+                {
+                    val token: Token? = dataSnapshot.getValue(Token::class.java)
+
+                    val data = Data(
+                        firebaseUser!!.uid,
+                        R.mipmap.ic_launcher,
+                        "$userName: $message",
+                        "New Message",
+                        userIdVisit
+                    )
+
+                    val sender = Sender(data!!, token!!.getToken().toString())
+
+                    apiService!!.sendNotification(sender)
+                        .enqueue(object : Callback<MyResponse>
+                        {
+                            override fun onResponse(
+                                call: Call<MyResponse>,
+                                response: Response<MyResponse>
+                            )
+                            {
+                                if (response.code() == 200)
+                                {
+                                    if (response.body()!!.success !== 1)
+                                    {
+                                        Toast.makeText(this@MessageChatActivity, "Failed, Nothing happen.", Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                            }
+
+                            override fun onFailure(call: Call<MyResponse>, t: Throwable) {
+
+                            }
+                        })
+                }
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
+    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -287,7 +296,7 @@ class MessageChatActivity : AppCompatActivity()
                                         val user = p0.getValue(Users::class.java)
                                         if (notify)
                                         {
-//                                            sendNotification(userIdVisit, user!!.getUserName(), "sent you an image.")
+                                            sendNotification(userIdVisit, user!!.getUserName(), "sent you an image.")
                                         }
                                         notify = false
                                     }

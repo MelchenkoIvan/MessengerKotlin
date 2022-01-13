@@ -85,7 +85,6 @@ class UserAdapter(
         holder.itemView.setOnClickListener {
             val options = arrayOf<CharSequence>(
                 "Send Message",
-                "Visit Profile"
             )
             val builder: AlertDialog.Builder = AlertDialog.Builder(mContext)
             builder.setTitle("What do you want?")
@@ -95,12 +94,6 @@ class UserAdapter(
                     val intent = Intent(mContext, MessageChatActivity::class.java)
                     intent.putExtra("visit_id", user.getUID())
                     mContext.startActivity(intent)
-                }
-                if (position == 1)
-                {
-//                    val intent = Intent(mContext, VisitUserProfileActivity::class.java)
-//                    intent.putExtra("visit_id", user.getUID())
-//                    mContext.startActivity(intent)
                 }
             })
             builder.show()
